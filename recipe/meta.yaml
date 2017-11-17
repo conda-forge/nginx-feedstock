@@ -36,7 +36,7 @@ requirements:
     - zlib 1.2.*
 
 test:
-  command:
+  commands:
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [linux]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
