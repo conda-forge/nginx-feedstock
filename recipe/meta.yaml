@@ -1,6 +1,6 @@
 {% set name = "nginx" %}
-{% set version = "1.12.2" %}
-{% set sha256 = "305f379da1d5fb5aefa79e45c829852ca6983c7cd2a79328f8e084a324cf0416" %}
+{% set version = "1.13.5" %}
+{% set sha256 = "0e75b94429b3f745377aeba3aff97da77bf2b03fcb9ff15b3bad9b038db29f2e" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 1
+  number: 0
   no_link:
     - etc/*
     - var/log/nginx/*
