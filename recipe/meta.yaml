@@ -1,6 +1,6 @@
 {% set name = "nginx" %}
-{% set version = "1.12.2" %}
-{% set sha256 = "305f379da1d5fb5aefa79e45c829852ca6983c7cd2a79328f8e084a324cf0416" %}
+{% set version = "1.14.0" %}
+{% set sha256 = "5d15becbf69aba1fe33f8d416d97edd95ea8919ea9ac519eff9bafebb6022cb5" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 1
+  number: 0
   no_link:
     - etc/*
     - var/log/nginx/*
@@ -22,22 +22,25 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+  host:
     - libgd 2.2.*
     - libxslt 1.1.*
-    - openssl 1.0.*
+    - openssl
     - pcre 8.*
-    - zlib 1.2.11
+    - zlib
   run:
     - libgd 2.2.*
     - libxslt 1.1.*
-    - openssl 1.0.*
+    - openssl
     - pcre 8.*
-    - zlib 1.2.11
+    - zlib
 
 test:
   commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [linux]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [unix]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
@@ -48,7 +51,7 @@ about:
   summary: Nginx is an HTTP and reverse proxy server
   description: |
     Nginx can act as a reverse proxy server for TCP, UDP, HTTP, HTTPS, SMTP,
-    POP3, and IMAP protocols, as well as a load balancer and an HTTP cache.
+    POP3, IMAP, and gRPC protocols, as well as a load balancer and an HTTP cache.
     Nginx uses an asynchronous event-driven approach to handling requests.
   doc_url: http://nginx.org/en/docs
   dev_url: http://hg.nginx.org/nginx
