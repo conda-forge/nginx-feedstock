@@ -10,21 +10,23 @@ Feedstock license: BSD 3-Clause
 Summary: Nginx is an HTTP and reverse proxy server
 
 Nginx can act as a reverse proxy server for TCP, UDP, HTTP, HTTPS, SMTP,
-POP3, and IMAP protocols, as well as a load balancer and an HTTP cache.
+POP3, IMAP, and gRPC protocols, as well as a load balancer and an HTTP cache.
 Nginx uses an asynchronous event-driven approach to handling requests.
 
 
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/nginx-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/nginx-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/nginx-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/nginx-feedstock)
-Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/nginx-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/nginx-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/nginx-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/nginx-feedstock)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/nginx/badges/version.svg)](https://anaconda.org/conda-forge/nginx)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/nginx/badges/downloads.svg)](https://anaconda.org/conda-forge/nginx)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-nginx-green.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) |
 
 Installing nginx
 ================
