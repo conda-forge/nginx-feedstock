@@ -1,6 +1,6 @@
 {% set name = "nginx" %}
-{% set version = "1.14.0" %}
-{% set sha256 = "5d15becbf69aba1fe33f8d416d97edd95ea8919ea9ac519eff9bafebb6022cb5" %}
+{% set version = "1.15.6" %}
+{% set sha256 = "a3d8c67c2035808c7c0d475fffe263db8c353b11521aa7ade468b780ed826cc6" %}
 
 package:
   name: {{ name|lower }}
@@ -36,7 +36,6 @@ requirements:
     - libxslt 1.1.*
     - openssl
     - pcre 8.*
-    - zlib
 
 test:
   commands:
