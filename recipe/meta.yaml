@@ -22,8 +22,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
   host:
     - libgd 2.2.*
     - libxslt 1.1.*
