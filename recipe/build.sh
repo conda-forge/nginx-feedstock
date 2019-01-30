@@ -4,14 +4,15 @@ env | sort
 
 ./configure --help || true
 
-CFLAGS="${CFLAGS} -I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
+NGINX_CC_OPT="${CFLAGS} -I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
+NGINX_LD_OPT="${LDFLAGS}"
 
-CONFIGURE_OPTS=""
+NGINX_CONFIGURE=""
 
 if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
   # TODO: ASLR
-   CONFIGURE_OPTS="\
+   NGINX_CONFIGURE="\
       --http-log-path=$PREFIX/var/log/nginx/access.log \
       --error-log-path=$PREFIX/var/log/nginx/error.log \
       --pid-path=$PREFIX/var/run/nginx/nginx.pid \
@@ -25,7 +26,7 @@ if [[ $(uname -s) == Darwin ]]; then
 
 elif [[ $(uname -s) == Linux ]]; then
   # TODO: ASLR
-  CONFIGURE_OPTS="\
+  NGINX_CONFIGURE="\
       --http-log-path=var/log/nginx/access.log \
       --error-log-path=var/log/nginx/error.log \
       --pid-path=var/run/nginx/nginx.pid \
@@ -38,7 +39,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --conf-path=etc/nginx/nginx.conf"
 fi
 
-./configure $CONFIGURE_OPTS \
+NGINX_CONFIGURE="${NGINX_CONFIGURE} \
       --sbin-path=sbin/nginx \
       --modules-path=lib/nginx/modules \
       --with-threads \
@@ -57,9 +58,18 @@ fi
       --with-pcre \
       --with-pcre-jit \
       --with-stream \
-      --with-cc-opt="$CFLAGS" \
-      --with-ld-opt="$LDFLAGS" \
-      --prefix="$PREFIX"
+      --prefix=$PREFIX"
+
+mkdir -p $PREFIX/lib/nginx
+echo "NGINX_CONFIGURE=\"$NGINX_CONFIGURE\"" > $PREFIX/lib/nginx/configure.env
+echo "NGINX_CC_OPT=\"$NGINX_CC_OPT\"" >> $PREFIX/lib/nginx/configure.env
+echo "NGINX_LD_OPT=\"$NGINX_LD_OPT\"" >> $PREFIX/lib/nginx/configure.env
+
+. $PREFIX/lib/nginx/configure.env
+
+./configure ${NGINX_CONFIGURE} \
+      --with-cc-opt="$NGINX_CC_OPT" \
+      --with-ld-opt="$NGINX_LD_OPT"
 
 make -j$CPU_COUNT
 make install
