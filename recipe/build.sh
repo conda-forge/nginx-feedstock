@@ -53,10 +53,10 @@ fi
       --with-http_secure_link_module \
       --with-http_stub_status_module \
       --with-http_xslt_module=dynamic \
-      --with-stream=dynamic \
       --with-http_image_filter_module=dynamic \
       --with-pcre \
       --with-pcre-jit \
+      --with-stream \
       --with-cc-opt="$CFLAGS" \
       --with-ld-opt="$LDFLAGS" \
       --prefix="$PREFIX"
