@@ -13,7 +13,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 1000
+  number: 0
   no_link:
     - etc/*
     - var/log/nginx/*
