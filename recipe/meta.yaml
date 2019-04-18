@@ -1,6 +1,6 @@
 {% set name = "nginx" %}
-{% set version = "1.15.10" %}
-{% set sha256 = "b865743abd52bce4745d0f7e7fedde3cafbaaab617b022c105e3e4e456537c3c" %}
+{% set version = "1.15.12" %}
+{% set sha256 = "3d5b90aa17de1700709ae4ec6c4d73d87c888b06c510391bf7104b006fdb2abe" %}
 
 package:
   name: {{ name|lower }}
