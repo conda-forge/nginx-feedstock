@@ -5,7 +5,7 @@ Home: http://www.nginx.org
 
 Package license: BSD-2-Clause
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Nginx is an HTTP and reverse proxy server
 
