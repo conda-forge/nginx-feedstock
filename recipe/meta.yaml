@@ -38,6 +38,7 @@ requirements:
 
 test:
   commands:
+    - nginx -h
 
 about:
   home: http://www.nginx.org
