@@ -24,6 +24,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
+    - make
   host:
     - libgd 2.2.*
     - libxslt 1.1.*
