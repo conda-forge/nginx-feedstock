@@ -29,13 +29,13 @@ requirements:
     - libgd 2.2.*
     - libxslt 1.1.*
     - openssl
-    - pcre 8.*
+    - pcre2
     - zlib
   run:
     - libgd 2.2.*
     - libxslt 1.1.*
     - openssl
-    - pcre 8.*
+    - pcre2
 
 test:
   commands:
