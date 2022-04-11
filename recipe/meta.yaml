@@ -13,7 +13,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 0
+  number: 1
   no_link:
     - etc/*
     - var/log/nginx/*
@@ -26,16 +26,11 @@ requirements:
     - {{ compiler('fortran') }}
     - make
   host:
-    - libgd 2.2.*
-    - libxslt 1.1.*
+    - libgd
+    - libxslt
     - openssl
     - pcre2
     - zlib
-  run:
-    - libgd 2.2.*
-    - libxslt 1.1.*
-    - openssl
-    - pcre2
 
 test:
   commands:
