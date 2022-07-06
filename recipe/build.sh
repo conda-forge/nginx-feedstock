@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get an updated config.sub and config.guess
+cp $BUILD_PREFIX/share/gnuconfig/config.* .
+
 env | sort
 
 ./configure --help || true
@@ -8,7 +11,7 @@ env | sort
 if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
   export cc_opt="-I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
-  
+
   # this works for macOS 10.12
   # export cc_opt="$cc_opt -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -fno-strict-overflow -m64 -mtune=generic -fPIC"
 
