@@ -9,6 +9,7 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
   sha256: 820acaa35b9272be9e9e72f6defa4a5f2921824709f8aa4772c78ab31ed94cd1
+
   patches:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
