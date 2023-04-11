@@ -1,11 +1,11 @@
-About nginx
-===========
+About nginx-feedstock
+=====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nginx-feedstock/blob/main/LICENSE.txt)
 
 Home: http://www.nginx.org
 
 Package license: BSD-2-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nginx-feedstock/blob/main/LICENSE.txt)
 
 Summary: Nginx is an HTTP and reverse proxy server
 
@@ -36,31 +36,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_openssl1.1.1</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=680&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_openssl1.1.1" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_openssl3</td>
+              <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=680&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_openssl3" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_openssl1.1.1</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=680&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_openssl1.1.1" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_openssl3</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=680&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_openssl3" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/nginx-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
                 </a>
               </td>
             </tr>
