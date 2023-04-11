@@ -1,5 +1,5 @@
 {% set name = "nginx" %}
-{% set version = "1.23.3" %}
+{% set version = "1.24.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: 75cb5787dbb9fae18b14810f91cc4343f64ce4c24e27302136fb52498042ba54
+  sha256: 77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d
 
   patches:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
