@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./build-aux
+
 env | sort
 
 ./configure --help || true

@@ -28,6 +28,7 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - make
+    - gnuconfig
   host:
     - libgd
     - libxslt
