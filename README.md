@@ -200,5 +200,6 @@ Feedstock Maintainers
 =====================
 
 * [@fhoehle](https://github.com/fhoehle/)
+* [@pavelzw](https://github.com/pavelzw/)
 * [@sodre](https://github.com/sodre/)
 
