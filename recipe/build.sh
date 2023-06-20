@@ -54,9 +54,10 @@ if [[ $(uname -s) == Darwin ]]; then
 
 elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
-  export cc_opt="$cc_opt -O2 -g -pipe -fPIC -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fno-strict-overflow -m64 -mtune=generic -fstack-protector --param=ssp-buffer-size=4"
+  export cc_opt="$cc_opt -O2 -g -pipe -fPIC -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fno-strict-overflow -mtune=generic -fstack-protector --param=ssp-buffer-size=4"
   # TODO: for later gcc, change -fstack-protector to -fstack-protector-strong
-  export ld_opt="-L$PREFIX/lib -Wl,-z,relro,-z,now"
+  export ld_opt="-L$PREFIX/lib"
+  # export ld_opt="-L$PREFIX/lib -Wl,-z,relro,-z,now"
   # http://security.stackexchange.com/questions/24444/what-is-the-most-hardened-set-of-options-for-gcc-compiling-c-c
   # https://blog.mayflower.de/5800-Hardening-Compiler-Flags-for-NixOS.html
   # TODO: ASLR
