@@ -42,6 +42,10 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
       --prefix="$PREFIX"
+  
+  ls -lah
+  tree
+
 
 
 elif [[ $(uname -s) == Linux ]]; then
@@ -80,9 +84,6 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
       --prefix="$PREFIX"
-
-      # this is removed for now because libgd apparently needs libwebp, not yet compiled for linux
-
 fi
 
 make -j$CPU_COUNT

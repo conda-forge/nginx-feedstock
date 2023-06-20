@@ -7,10 +7,12 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: f09071ac46e0ea3adc0008ef0baca229fc6b4be4533baef9bbbfba7de29a8602
+  url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/release-{{ version }}.tar.gz
+  # url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
+  sha256: d82c52a4ea9e231d9ae2111090da60806bf280ad7937ccb51311b26700ea6b4d
 
   patches:
+    - test.patch
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
