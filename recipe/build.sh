@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir build-aux
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./build-aux
+
 env | sort
 
 ./configure --help || true
@@ -41,7 +44,13 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-pcre-jit \
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
+      --with-debug \
       --prefix="$PREFIX"
+  
+  ls -lah
+  tree
+
+
 
 elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
@@ -78,6 +87,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-pcre-jit \
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
+      --with-debug \
       --prefix="$PREFIX"
 fi
 
