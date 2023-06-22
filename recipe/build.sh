@@ -15,6 +15,7 @@ if [[ $(uname -s) == Darwin ]]; then
 
   patch src/os/unix/ngx_darwin_config.h $RECIPE_DIR/ngx_darwin_config.h.patch
   patch auto/feature $RECIPE_DIR/feature.patch
+  patch auto/unix $RECIPE_DIR/unix.patch
 
   ./configure \
       --http-log-path=$PREFIX/var/log/nginx/access.log \
