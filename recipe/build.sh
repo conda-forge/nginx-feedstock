@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir build-aux
+cp $BUILD_PREFIX/share/gnuconfig/config.* ./build-aux
+
 env | sort
 
 ./configure --help || true
@@ -9,6 +12,10 @@ if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
   export cc_opt="-I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
   export ld_opt="-L$PREFIX/lib"
+
+  patch src/os/unix/ngx_darwin_config.h $RECIPE_DIR/ngx_darwin_config.h.patch
+  patch auto/feature $RECIPE_DIR/feature.patch
+  patch auto/unix $RECIPE_DIR/unix.patch
 
   ./configure \
       --http-log-path=$PREFIX/var/log/nginx/access.log \
@@ -41,7 +48,12 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-pcre-jit \
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
+      --with-debug \
       --prefix="$PREFIX"
+  
+  ls -lah
+
+
 
 elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
@@ -78,6 +90,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-pcre-jit \
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
+      --with-debug \
       --prefix="$PREFIX"
 fi
 
