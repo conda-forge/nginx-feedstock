@@ -16,7 +16,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 1
+  number: 2
   no_link:
     - etc/*
     - var/log/nginx/*
@@ -60,3 +60,4 @@ extra:
     - sodre
     - fhoehle
     - pavelzw
+    - '0xbe7a'
