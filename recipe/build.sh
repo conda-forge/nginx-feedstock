@@ -108,8 +108,8 @@ cp $RECIPE_DIR/default-site.conf $PREFIX/etc/nginx/sites.d/
 # support empty directory creation at install time.
 mkdir -p $PREFIX/var/tmp/nginx/client/
 touch $PREFIX/var/tmp/nginx/client/.mkdir
-mkdir -p $PREFIX/var/run/
-touch $PREFIX/var/run/.mkdir
+mkdir -p $PREFIX/var/run/nginx
+touch $PREFIX/var/run/nginx/.mkdir
 mkdir -p $PREFIX/var/log/nginx
 touch $PREFIX/var/log/nginx/{access,error}.log
 
