@@ -1,5 +1,5 @@
 {% set name = "nginx" %}
-{% set version = "1.25.3" %}
+{% set version = "1.25.4" %}
 
 package:
   name: {{ name|lower }}
@@ -16,7 +16,7 @@ source:
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
-  number: 1
+  number: 0
   no_link:
     - etc/*
     - var/log/nginx/*
