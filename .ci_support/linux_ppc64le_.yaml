@@ -23,7 +23,7 @@ fortran_compiler_version:
 openssl:
 - '3'
 pcre2:
-- '10.42'
+- '10.43'
 target_platform:
 - linux-ppc64le
 zip_keys:
