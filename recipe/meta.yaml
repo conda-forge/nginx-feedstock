@@ -12,7 +12,7 @@ source:
   sha256: 64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86
 
   patches:
-    - test.patch  # [osx and arm64]
+    - darwin.patch  # [osx and arm64]
     - pcre-config.patch  # find pcre in PREFIX instead of /usr
 
 build:
@@ -60,3 +60,4 @@ extra:
     - sodre
     - fhoehle
     - pavelzw
+    - '0xbe7a'

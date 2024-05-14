@@ -13,10 +13,6 @@ if [[ $(uname -s) == Darwin ]]; then
   export cc_opt="-I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
   export ld_opt="-L$PREFIX/lib"
 
-  patch src/os/unix/ngx_darwin_config.h $RECIPE_DIR/ngx_darwin_config.h.patch
-  patch auto/feature $RECIPE_DIR/feature.patch
-  patch auto/unix $RECIPE_DIR/unix.patch
-
   ./configure \
       --http-log-path=$PREFIX/var/log/nginx/access.log \
       --error-log-path=$PREFIX/var/log/nginx/error.log \
