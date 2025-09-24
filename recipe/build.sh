@@ -49,7 +49,7 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
       --with-debug \
-      --prefix="$PREFIX"
+      --prefix="$PREFIX" || (cat config.log; exit 1)
   
   ls -lah
 
@@ -91,7 +91,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
       --with-debug \
-      --prefix="$PREFIX"
+      --prefix="$PREFIX" || (cat config.log; exit 1)
 fi
 
 make -j$CPU_COUNT
