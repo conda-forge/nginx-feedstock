@@ -9,7 +9,7 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   # url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/release-{{ version }}.tar.gz
   url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: 64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86
+  sha256: 5669e3c29d49bf7f6eb577275b86efe4504cf81af885c58a1ed7d2e7b8492437
 
   patches:
     - test.patch  # [osx and arm64]
@@ -62,3 +62,4 @@ extra:
     - sodre
     - fhoehle
     - pavelzw
+    - hobu
