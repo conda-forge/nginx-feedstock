@@ -33,7 +33,7 @@ requirements:
   host:
     - libgd
     - libxslt ==1.1.39
-    - libxcrypt  # [linux]
+    - libgcrypt  # [linux]
     - openssl
     - pcre2
     - zlib
