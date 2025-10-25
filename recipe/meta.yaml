@@ -32,7 +32,7 @@ requirements:
     - gnuconfig
   host:
     - libgd
-    - libxslt
+    - libxslt==1.1.39
     - libxcrypt  # [linux]
     - openssl
     - pcre2
