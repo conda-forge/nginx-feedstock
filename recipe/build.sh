@@ -9,7 +9,7 @@ env | sort
 
 git clone https://github.com/evanmiller/mod_zip.git mod_zip
 cd mod_zip && git checkout a9f9afa441117831cc712a832c98408b3f0416f6
-MODZIPDIR=$(pwd)
+MODZIPDIR="$(pwd)"
 cd ..
 
 
@@ -79,6 +79,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --conf-path=etc/nginx/nginx.conf \
       --modules-path=lib/nginx/modules \
       --with-threads \
+      --add-module=$MODZIPDIR \
       --with-http_ssl_module \
       --with-http_v2_module \
       --with-http_realip_module \
@@ -92,7 +93,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-http_xslt_module=dynamic \
       --with-stream=dynamic \
       --with-http_image_filter_module=dynamic \
-      --with-pcre="$PREFIX" \
+      --with-pcre \
       --with-pcre-jit \
       --with-cc-opt="$cc_opt" \
       --with-ld-opt="$ld_opt" \
