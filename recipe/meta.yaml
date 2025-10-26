@@ -43,7 +43,7 @@ test:
     - nginx -h
   requires:
     - curl
-    - procps-ng  # [unix]
+    - procps-ng  # [linux]
 
 about:
   home: http://www.nginx.org
