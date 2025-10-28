@@ -28,6 +28,8 @@ pidof() {
     fi
 }
 
+alias killall="killall5"
+
 die() {
     sleep 3
     pidof nginx && killall nginx

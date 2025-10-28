@@ -7,6 +7,11 @@ env | sort
 
 ./configure --help || true
 
+git clone https://github.com/evanmiller/mod_zip.git mod_zip
+cd mod_zip && git checkout a9f9afa441117831cc712a832c98408b3f0416f6
+MODZIPDIR="$(pwd)"
+cd ..
+
 
 if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
@@ -31,6 +36,7 @@ if [[ $(uname -s) == Darwin ]]; then
       --conf-path=$PREFIX/etc/nginx/nginx.conf \
       --modules-path=lib/nginx/modules \
       --with-threads \
+      --add-module=$MODZIPDIR \
       --with-http_ssl_module \
       --with-http_v2_module \
       --with-http_realip_module \
@@ -50,7 +56,7 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-ld-opt="$ld_opt" \
       --with-debug \
       --prefix="$PREFIX"
-  
+
   ls -lah
 
 
@@ -73,6 +79,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --conf-path=etc/nginx/nginx.conf \
       --modules-path=lib/nginx/modules \
       --with-threads \
+      --add-module=$MODZIPDIR \
       --with-http_ssl_module \
       --with-http_v2_module \
       --with-http_realip_module \
