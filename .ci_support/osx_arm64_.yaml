@@ -29,7 +29,7 @@ macos_machine:
 openssl:
 - '3.5'
 pcre2:
-- '10.46'
+- '10.47'
 target_platform:
 - osx-arm64
 zip_keys:
