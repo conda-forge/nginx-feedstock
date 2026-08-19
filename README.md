@@ -81,31 +81,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `nginx` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install nginx
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install nginx
 ```
 
-It is possible to list all of the versions of `nginx` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add nginx
+# for installing globally
+pixi global install nginx
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `nginx` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search nginx --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search nginx --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search nginx --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -117,6 +159,8 @@ mamba repoquery whoneeds nginx --channel conda-forge
 # List dependencies of `nginx`:
 mamba repoquery depends nginx --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge
