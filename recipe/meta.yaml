@@ -1,5 +1,5 @@
 {% set name = "nginx" %}
-{% set version = "1.31.3" %}
+{% set version = "1.31.4" %}
 
 package:
   name: {{ name|lower }}
@@ -9,7 +9,7 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   # url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/release-{{ version }}.tar.gz
   url: https://nginx.org/download/{{ name }}-{{ version }}.tar.gz
-  sha256: a7657c50811c2d92d9895395e8b873ef60398142c4db21eb647811c38f6dd525
+  sha256: e6f20b644a17a643f059ae6467a1971fe2811587d025e071068753a1f1e3b3c3
 
   patches:
     - test.patch  # [osx and arm64]
