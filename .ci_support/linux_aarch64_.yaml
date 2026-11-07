@@ -1,3 +1,5 @@
+DOCKER_PLATFORM:
+- linux/aarch64
 c_compiler:
 - gcc
 c_compiler_version:
@@ -25,7 +27,7 @@ fortran_compiler_version:
 openssl:
 - '3.5'
 pcre2:
-- '10.47'
+- '10.49'
 target_platform:
 - linux-aarch64
 zip_keys:
