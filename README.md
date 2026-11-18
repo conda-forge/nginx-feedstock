@@ -3,20 +3,19 @@ About nginx-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nginx-feedstock/blob/main/LICENSE.txt)
 
-Home: http://www.nginx.org
+Home: https://nginx.org/
 
 Package license: BSD-2-Clause
 
 Summary: Nginx is an HTTP and reverse proxy server
 
-Development: http://hg.nginx.org/nginx
+Development: https://github.com/nginx/nginx
 
-Documentation: http://nginx.org/en/docs
+Documentation: https://nginx.org/en/docs
 
 Nginx can act as a reverse proxy server for TCP, UDP, HTTP, HTTPS, SMTP,
 POP3, IMAP, and gRPC protocols, as well as a load balancer and an HTTP cache.
 Nginx uses an asynchronous event-driven approach to handling requests.
-
 
 Current build status
 ====================
