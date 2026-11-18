@@ -33,7 +33,8 @@ requirements:
     - gnuconfig
   host:
     - libgd
-    - libxslt ==1.1.39
+    - libxslt
+    - libxml2-devel
     - if: linux
       then: libgcrypt
     - openssl
