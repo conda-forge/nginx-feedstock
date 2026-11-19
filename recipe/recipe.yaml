@@ -62,6 +62,16 @@ tests:
     script:
       - nginx -h
       - bash run_test.sh
+  - if: linux
+    then:
+      files:
+        recipe:
+          - test_auth_crypt.sh
+      requirements:
+        run:
+          - curl
+      script:
+        - bash test_auth_crypt.sh
 
 about:
   homepage: https://nginx.org
