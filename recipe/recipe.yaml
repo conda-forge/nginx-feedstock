@@ -2,80 +2,139 @@ schema_version: 1
 
 context:
   version: "1.31.9"
+  geoip2_version: "3.4"
 
-package:
+recipe:
   name: nginx
   version: ${{ version }}
 
 source:
-  url: https://nginx.org/download/nginx-${{ version }}.tar.gz
-  sha256: a11c5eeee2e257f4478f0e649f84b0040787d277d2d3e5233952aa6b6dcb80ad
-  patches:
-    - if: osx and arm64
-      then: test.patch
-    # find pcre in PREFIX instead of /usr
-    - pcre-config.patch
+  - url: https://nginx.org/download/nginx-${{ version }}.tar.gz
+    sha256: a11c5eeee2e257f4478f0e649f84b0040787d277d2d3e5233952aa6b6dcb80ad
+    patches:
+      - if: osx and arm64
+        then: test.patch
+      # find pcre in PREFIX instead of /usr
+      - pcre-config.patch
+  - url: https://github.com/leev/ngx_http_geoip2_module/archive/refs/tags/${{ geoip2_version }}.tar.gz
+    sha256: ad72fc23348d715a330994984531fab9b3606e160483236737f9a4a6957d9452
+    target_directory: ngx_http_geoip2_module
 
 build:
-  number: 1
+  number: 2
   skip: win
-  always_copy_files:
-    - etc/*
-    - var/log/nginx/*
 
-requirements:
-  build:
-    - ${{ compiler('c') }}
-    - ${{ stdlib('c') }}
-    - make
-    - gnuconfig
-  host:
-    - libgd
-    - libxslt
-    - libxml2-devel
-    # mod_zip filename charset conversion
-    - libiconv
-    # crypt() for auth_basic password schemes beyond {PLAIN}/{SHA}/{SSHA}/$apr1$
-    - if: linux
-      then: libxcrypt
-    - openssl
-    - pcre2
-    - zlib
-
-tests:
-  - package_contents:
-      bin:
-        - nginx
-      files:
-        - sbin/nginx
-        - etc/nginx/nginx.conf
-        - etc/nginx/nginx.conf.default
-        - etc/nginx/sites.d/default-site.conf
-        - lib/nginx/modules/ngx_mail_module.so
-        - lib/nginx/modules/ngx_stream_module.so
-        - lib/nginx/modules/ngx_http_xslt_filter_module.so
-        - lib/nginx/modules/ngx_http_image_filter_module.so
-  - files:
-      recipe:
-        - run_test.sh
+outputs:
+  - staging:
+      name: nginx-build
     requirements:
-      run:
-        - curl
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - make
+        - gnuconfig
+      host:
+        - libgd
+        - libxslt
+        - libxml2-devel
+        # mod_zip filename charset conversion
+        - libiconv
+        # crypt() for auth_basic password schemes beyond {PLAIN}/{SHA}/{SSHA}/$apr1$
         - if: linux
-          then: procps-ng
-    script:
-      - nginx -h
-      - bash run_test.sh
-  - if: linux
-    then:
+          then: libxcrypt
+        - libmaxminddb
+        - openssl
+        - pcre2
+        - zlib
+      ignore_run_exports:
+        by_name:
+          # only the nginx-mod-geoip2 output links libmaxminddb
+          - libmaxminddb
+    build:
+      script: build.sh
+
+  - package:
+      name: nginx
+    inherit: nginx-build
+    build:
+      always_copy_files:
+        - etc/*
+        - var/log/nginx/*
       files:
-        recipe:
-          - test_auth_crypt.sh
-      requirements:
-        run:
-          - curl
-      script:
-        - bash test_auth_crypt.sh
+        include:
+          - "**"
+        exclude:
+          - lib/nginx/modules/ngx_http_geoip2_module.so
+          - lib/nginx/modules/ngx_stream_geoip2_module.so
+    tests:
+      - package_contents:
+          bin:
+            - nginx
+          files:
+            - sbin/nginx
+            - etc/nginx/nginx.conf
+            - etc/nginx/nginx.conf.default
+            - etc/nginx/sites.d/default-site.conf
+            - lib/nginx/modules/ngx_mail_module.so
+            - lib/nginx/modules/ngx_stream_module.so
+            - lib/nginx/modules/ngx_http_xslt_filter_module.so
+            - lib/nginx/modules/ngx_http_image_filter_module.so
+      - files:
+          recipe:
+            - run_test.sh
+        requirements:
+          run:
+            - curl
+            - if: linux
+              then: procps-ng
+        script:
+          - nginx -h
+          - bash run_test.sh
+      - if: linux
+        then:
+          files:
+            recipe:
+              - test_auth_crypt.sh
+          requirements:
+            run:
+              - curl
+          script:
+            - bash test_auth_crypt.sh
+
+  - package:
+      name: nginx-mod-geoip2
+      version: ${{ version }}
+    inherit:
+      from: nginx-build
+      run_exports: false
+    build:
+      files:
+        - lib/nginx/modules/ngx_http_geoip2_module.so
+        - lib/nginx/modules/ngx_stream_geoip2_module.so
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+      host:
+        - libmaxminddb
+      run:
+        # dynamic modules must match the exact nginx build
+        - ${{ pin_subpackage('nginx', exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            - lib/nginx/modules/ngx_http_geoip2_module.so
+            - lib/nginx/modules/ngx_stream_geoip2_module.so
+      - files:
+          recipe:
+            - test_geoip2.sh
+        script:
+          - bash test_geoip2.sh
+    about:
+      homepage: https://github.com/leev/ngx_http_geoip2_module
+      license: BSD-2-Clause
+      license_file: ngx_http_geoip2_module/LICENSE
+      summary: nginx dynamic modules for MaxMind GeoIP2 / GeoLite2 (http and stream)
 
 about:
   homepage: https://nginx.org

@@ -39,6 +39,7 @@ if [[ $(uname -s) == Darwin ]]; then
       --modules-path=lib/nginx/modules \
       --with-threads \
       --add-module=$MODZIPDIR \
+      --add-dynamic-module=$SRC_DIR/ngx_http_geoip2_module \
       --with-http_ssl_module \
       --with-http_v2_module \
       --with-http_realip_module \
@@ -99,6 +100,7 @@ elif [[ $(uname -s) == Linux ]]; then
       --modules-path=lib/nginx/modules \
       --with-threads \
       --add-module=$MODZIPDIR \
+      --add-dynamic-module=$SRC_DIR/ngx_http_geoip2_module \
       --with-http_ssl_module \
       --with-http_v2_module \
       --with-http_realip_module \
