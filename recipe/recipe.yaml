@@ -1,0 +1,80 @@
+schema_version: 1
+
+context:
+  version: "1.31.9"
+
+package:
+  name: nginx
+  version: ${{ version }}
+
+source:
+  url: https://nginx.org/download/nginx-${{ version }}.tar.gz
+  sha256: a11c5eeee2e257f4478f0e649f84b0040787d277d2d3e5233952aa6b6dcb80ad
+  patches:
+    - if: osx and arm64
+      then: test.patch
+    # find pcre in PREFIX instead of /usr
+    - pcre-config.patch
+
+build:
+  number: 0
+  skip: win
+  always_copy_files:
+    - etc/*
+    - var/log/nginx/*
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - make
+    - gnuconfig
+  host:
+    - libgd
+    - libxslt
+    - libxml2-devel
+    - if: osx
+      then: libiconv
+    - openssl
+    - pcre2
+    - zlib
+
+tests:
+  - package_contents:
+      bin:
+        - nginx
+      files:
+        - sbin/nginx
+        - etc/nginx/nginx.conf
+        - etc/nginx/nginx.conf.default
+        - etc/nginx/sites.d/default-site.conf
+  - files:
+      recipe:
+        - run_test.sh
+    requirements:
+      run:
+        - curl
+        - if: linux
+          then: procps-ng
+    script:
+      - nginx -h
+      - bash run_test.sh
+
+about:
+  homepage: https://nginx.org
+  license: BSD-2-Clause
+  license_file: LICENSE
+  summary: Nginx is an HTTP and reverse proxy server
+  description: |
+    Nginx can act as a reverse proxy server for TCP, UDP, HTTP, HTTPS, SMTP,
+    POP3, IMAP, and gRPC protocols, as well as a load balancer and an HTTP cache.
+    Nginx uses an asynchronous event-driven approach to handling requests.
+  documentation: https://nginx.org/en/docs
+  repository: https://github.com/nginx/nginx
+
+extra:
+  recipe-maintainers:
+    - sodre
+    - fhoehle
+    - pavelzw
+    - hobu
