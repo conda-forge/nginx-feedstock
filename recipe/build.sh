@@ -13,10 +13,12 @@ MODZIPDIR="$(pwd)"
 cd ..
 
 
+# nginx's configure ignores $LDFLAGS and only uses --with-ld-opt, so pass
+# conda-forge's LDFLAGS (rpath, relro/now, as-needed, ...) through explicitly.
 if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
   export cc_opt="-I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
-  export ld_opt="-L$PREFIX/lib"
+  export ld_opt="$LDFLAGS"
 
   patch src/os/unix/ngx_darwin_config.h $RECIPE_DIR/ngx_darwin_config.h.patch
   patch auto/feature $RECIPE_DIR/feature.patch
@@ -77,8 +79,7 @@ elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
   # conda-forge's iconv.h (from libiconv, pulled in by libgd) maps iconv_open to
   # libiconv_open, but mod_zip assumes glibc iconv on Linux and adds no -liconv.
-  # The rpath lets configure's autotest binaries find libiconv.so at runtime.
-  export ld_opt="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -liconv"
+  export ld_opt="$LDFLAGS -liconv"
 
   ./configure \
       --http-log-path=var/log/nginx/access.log \
