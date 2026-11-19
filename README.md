@@ -3,11 +3,32 @@ About nginx-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/nginx-feedstock/blob/main/LICENSE.txt)
 
+
+About nginx
+-----------
+
 Home: https://nginx.org/
 
 Package license: BSD-2-Clause
 
 Summary: Nginx is an HTTP and reverse proxy server
+
+Development: https://github.com/nginx/nginx
+
+Documentation: https://nginx.org/en/docs
+
+Nginx can act as a reverse proxy server for TCP, UDP, HTTP, HTTPS, SMTP,
+POP3, IMAP, and gRPC protocols, as well as a load balancer and an HTTP cache.
+Nginx uses an asynchronous event-driven approach to handling requests.
+
+About nginx-mod-geoip2
+----------------------
+
+Home: https://github.com/leev/ngx_http_geoip2_module
+
+Package license: BSD-2-Clause
+
+Summary: nginx dynamic modules for MaxMind GeoIP2 / GeoLite2 (http and stream)
 
 Development: https://github.com/nginx/nginx
 
@@ -69,6 +90,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-nginx-green.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nginx.svg)](https://anaconda.org/conda-forge/nginx) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-nginx--mod--geoip2-green.svg)](https://anaconda.org/conda-forge/nginx-mod-geoip2) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/nginx-mod-geoip2.svg)](https://anaconda.org/conda-forge/nginx-mod-geoip2) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/nginx-mod-geoip2.svg)](https://anaconda.org/conda-forge/nginx-mod-geoip2) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/nginx-mod-geoip2.svg)](https://anaconda.org/conda-forge/nginx-mod-geoip2) |
 
 Installing nginx
 ================
@@ -87,7 +109,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install nginx
+conda install nginx nginx-mod-geoip2
 ```
 
 </details>
@@ -96,7 +118,7 @@ conda install nginx
 <summary>With mamba</summary>
 
 ```
-mamba install nginx
+mamba install nginx nginx-mod-geoip2
 ```
 
 </details>
@@ -106,9 +128,9 @@ mamba install nginx
 
 ```
 # for adding to your local project
-pixi add nginx
+pixi add nginx nginx-mod-geoip2
 # for installing globally
-pixi global install nginx
+pixi global install nginx nginx-mod-geoip2
 ```
 
 </details>
