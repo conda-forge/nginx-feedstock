@@ -49,6 +49,18 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-http_secure_link_module \
       --with-http_stub_status_module \
       --with-stream=dynamic \
+      --with-stream_ssl_module \
+      --with-stream_ssl_preread_module \
+      --with-stream_realip_module \
+      --with-mail=dynamic \
+      --with-mail_ssl_module \
+      --with-http_v3_module \
+      --with-http_dav_module \
+      --with-http_slice_module \
+      --with-http_flv_module \
+      --with-http_mp4_module \
+      --with-http_random_index_module \
+      --with-compat \
       --with-http_image_filter_module=dynamic \
       --with-pcre \
       --with-pcre-jit \
@@ -94,6 +106,18 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-http_stub_status_module \
       --with-http_xslt_module=dynamic \
       --with-stream=dynamic \
+      --with-stream_ssl_module \
+      --with-stream_ssl_preread_module \
+      --with-stream_realip_module \
+      --with-mail=dynamic \
+      --with-mail_ssl_module \
+      --with-http_v3_module \
+      --with-http_dav_module \
+      --with-http_slice_module \
+      --with-http_flv_module \
+      --with-http_mp4_module \
+      --with-http_random_index_module \
+      --with-compat \
       --with-http_image_filter_module=dynamic \
       --with-pcre \
       --with-pcre-jit \

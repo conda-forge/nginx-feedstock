@@ -51,6 +51,10 @@ tests:
         - etc/nginx/nginx.conf
         - etc/nginx/nginx.conf.default
         - etc/nginx/sites.d/default-site.conf
+        - lib/nginx/modules/ngx_mail_module.so
+        - lib/nginx/modules/ngx_stream_module.so
+        - lib/nginx/modules/ngx_http_xslt_filter_module.so
+        - lib/nginx/modules/ngx_http_image_filter_module.so
   - files:
       recipe:
         - run_test.sh
