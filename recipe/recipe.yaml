@@ -17,7 +17,7 @@ source:
     - pcre-config.patch
 
 build:
-  number: 0
+  number: 1
   skip: win
   always_copy_files:
     - etc/*
