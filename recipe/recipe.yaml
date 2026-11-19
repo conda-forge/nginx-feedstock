@@ -33,8 +33,11 @@ requirements:
     - libgd
     - libxslt
     - libxml2-devel
-    - if: osx
-      then: libiconv
+    # mod_zip filename charset conversion
+    - libiconv
+    # crypt() for auth_basic password schemes beyond {PLAIN}/{SHA}/{SSHA}/$apr1$
+    - if: linux
+      then: libxcrypt
     - openssl
     - pcre2
     - zlib
