@@ -77,7 +77,8 @@ elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
   # conda-forge's iconv.h (from libiconv, pulled in by libgd) maps iconv_open to
   # libiconv_open, but mod_zip assumes glibc iconv on Linux and adds no -liconv.
-  export ld_opt="-L$PREFIX/lib -liconv"
+  # The rpath lets configure's autotest binaries find libiconv.so at runtime.
+  export ld_opt="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib -liconv"
 
   ./configure \
       --http-log-path=var/log/nginx/access.log \
