@@ -4,7 +4,8 @@
 set -euo pipefail
 
 D=$(mktemp -d)
-mkdir -p "$D/logs" "$D/html"
+# On Linux the default log/temp paths are relative to the -p prefix.
+mkdir -p "$D/logs" "$D/html" "$D/var/log/nginx" "$D/var/tmp/nginx"
 echo ok > "$D/html/index.html"
 cat > "$D/htpasswd" <<'X'
 bc:$2b$05$WF7IxAcEn4MBhQBDoNjGQeNrSGN/M5DK..ffiHH27..R/FAhXB2dK
@@ -36,7 +37,7 @@ done
 
 check() {
   local creds=$1 expected=$2 got
-  got=$(curl -s -o /dev/null -w '%{http_code}' -u "$creds" http://127.0.0.1:18090/)
+  got=$(curl -s -o /dev/null -w '%{http_code}' -u "$creds" http://127.0.0.1:18090/ || true)
   if [[ "$got" != "$expected" ]]; then
     echo "FAIL: $creds -> $got (expected $expected)"
     cat "$D/logs/error.log"
