@@ -80,6 +80,9 @@ elif [[ $(uname -s) == Linux ]]; then
   # conda-forge's iconv.h (from libiconv, pulled in by libgd) maps iconv_open to
   # libiconv_open, but mod_zip assumes glibc iconv on Linux and adds no -liconv.
   export ld_opt="$LDFLAGS -liconv"
+  # auto/include probes headers with a bare "$CC" (no CFLAGS/--with-cc-opt), so
+  # crypt.h from libxcrypt in $PREFIX/include is missed without this.
+  export CPATH="$PREFIX/include"
 
   ./configure \
       --http-log-path=var/log/nginx/access.log \
