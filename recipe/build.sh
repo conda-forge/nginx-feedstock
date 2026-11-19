@@ -13,10 +13,12 @@ MODZIPDIR="$(pwd)"
 cd ..
 
 
+# nginx's configure ignores $LDFLAGS and only uses --with-ld-opt, so pass
+# conda-forge's LDFLAGS (rpath, relro/now, as-needed, ...) through explicitly.
 if [[ $(uname -s) == Darwin ]]; then
   export DYLD_FALLBACK_LIBRARY_PATH=${PREFIX}/lib
   export cc_opt="-I$PREFIX/include  -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
-  export ld_opt="-L$PREFIX/lib"
+  export ld_opt="$LDFLAGS"
 
   patch src/os/unix/ngx_darwin_config.h $RECIPE_DIR/ngx_darwin_config.h.patch
   patch auto/feature $RECIPE_DIR/feature.patch
@@ -49,6 +51,18 @@ if [[ $(uname -s) == Darwin ]]; then
       --with-http_secure_link_module \
       --with-http_stub_status_module \
       --with-stream=dynamic \
+      --with-stream_ssl_module \
+      --with-stream_ssl_preread_module \
+      --with-stream_realip_module \
+      --with-mail=dynamic \
+      --with-mail_ssl_module \
+      --with-http_v3_module \
+      --with-http_dav_module \
+      --with-http_slice_module \
+      --with-http_flv_module \
+      --with-http_mp4_module \
+      --with-http_random_index_module \
+      --with-compat \
       --with-http_image_filter_module=dynamic \
       --with-pcre \
       --with-pcre-jit \
@@ -63,7 +77,12 @@ if [[ $(uname -s) == Darwin ]]; then
 
 elif [[ $(uname -s) == Linux ]]; then
   export cc_opt="-I$PREFIX/include -I$PREFIX/include/libxml2 -I$PREFIX/include/libexslt -I$PREFIX/include/libxslt -I$PREFIX/include/openssl"
-  export ld_opt="-L$PREFIX/lib"
+  # conda-forge's iconv.h (from libiconv, pulled in by libgd) maps iconv_open to
+  # libiconv_open, but mod_zip assumes glibc iconv on Linux and adds no -liconv.
+  export ld_opt="$LDFLAGS -liconv"
+  # auto/include probes headers with a bare "$CC" (no CFLAGS/--with-cc-opt), so
+  # crypt.h from libxcrypt in $PREFIX/include is missed without this.
+  export CPATH="$PREFIX/include"
 
   ./configure \
       --http-log-path=var/log/nginx/access.log \
@@ -92,6 +111,18 @@ elif [[ $(uname -s) == Linux ]]; then
       --with-http_stub_status_module \
       --with-http_xslt_module=dynamic \
       --with-stream=dynamic \
+      --with-stream_ssl_module \
+      --with-stream_ssl_preread_module \
+      --with-stream_realip_module \
+      --with-mail=dynamic \
+      --with-mail_ssl_module \
+      --with-http_v3_module \
+      --with-http_dav_module \
+      --with-http_slice_module \
+      --with-http_flv_module \
+      --with-http_mp4_module \
+      --with-http_random_index_module \
+      --with-compat \
       --with-http_image_filter_module=dynamic \
       --with-pcre \
       --with-pcre-jit \
